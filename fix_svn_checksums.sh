@@ -20,7 +20,7 @@ while [[ -n $EXPECTED ]]; do
     svnadmin load $SVN_TARGET < $1 1> $OUTPUT 2> $ERRPUT
     echo ' done!'
 
-    grep 'Committed revision' $ERRPUT | tail -1
+    grep 'Committed revision' $OUTPUT | tail -1
 
     EXPECTED=`grep expected: $ERRPUT | sed "s/ *expected:  //"`
     ACTUAL=`grep actual: $ERRPUT | sed "s/ *actual:  //"`
