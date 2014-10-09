@@ -4,6 +4,7 @@
 RERUN=/tmp/fixed_checksums.sh
 echo 'sed ' > $RERUN
 
+INFILE=${1}
 SVN_TARGET=`mktemp -d`   # we will dump the svn a lot, put it on a different location to not stress journald so much
 
 EXPECTED='x'
@@ -17,7 +18,7 @@ while [[ -n $EXPECTED ]]; do
     SVN_TARGET=`mktemp -d`
     echo -n "\tCreating $SVN_TARGET ..."
     svnadmin create $SVN_TARGET
-    svnadmin load $SVN_TARGET < $1 1> $OUTPUT 2> $ERRPUT
+    svnadmin load $SVN_TARGET < $INFILE 1> $OUTPUT 2> $ERRPUT
     echo ' done!'
 
     grep 'Committed revision' $OUTPUT | tail -1
